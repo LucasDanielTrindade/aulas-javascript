@@ -3,6 +3,36 @@ const prompt = require('prompt-sync')();
 let Itens = [];
 let opcao = 0;
 
+function gerarInteiroInclusivo(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function SimularVenda() {
+    let opcao = Number(prompt("Insira a quantidade de itens que serão vendidos: "));
+
+    console.log("Quantidade de vendas:", opcao);
+    if (Itens.length > 0) {
+        for (let i = 0; i < opcao; i++) {
+            let indice = gerarInteiroInclusivo(0, Itens.length - 1);
+            if (Itens[indice].Estoque > 0) {
+                Itens[indice].Estoque -= 1;
+                console.log("Item vendido:", Itens[indice]);
+            }
+        }
+        for (let item of Itens) {
+            if (item.Estoque <= 0) {
+                console.log(`Item: ${item} removido por ter 0 unidades disponiveis.`)
+                Itens.splice(item)
+            }
+
+        }
+        console.table(Itens);
+    }
+}
+
 function ProcurarProdutos() {
     console.log("\n--- Itens Disponíveis ---");
     console.table(Itens);
@@ -10,7 +40,7 @@ function ProcurarProdutos() {
     let escolha = prompt("Deseja fazer uma busca mais detalhada? [1]Sim [2]Não: ");
     if (escolha === "1") {
         let busca = prompt("Insira a palavra-chave pelo qual deseja buscar: ").trim().toLowerCase();
-        
+
         let ArrayBusca = Itens.filter(item =>
             typeof item.Nome === "string" &&
             item.Nome.toLowerCase().includes(busca)
@@ -44,40 +74,46 @@ function CadastrarProduto() {
             preco = parseFloat(prompt(`Preço inválido. Insira novamente o preço do ${i}º item: `));
         }
 
-        let raridade = "Comum";
+        let raridade = "Comum";mbgbs
         let emDestaque = false;
 
         if (preco >= 50 && preco < 100) {
-            raridade = "Incomum";
+            raridade = "Incomum"
         } else if (preco >= 100 && preco < 500) {
             raridade = "Raro";
         } else if (preco >= 500) {
             raridade = "Lendário";
             emDestaque = true;
         }
-
+        emPromocao = ((Itens.length + 1) % 2 == 0)
         let FichaItemTemplate = {
             Nome: nome,
             Preco: preco,
             Raridade: raridade,
             Estoque: 12,
-            Destaque: emDestaque
+            Destaque: emDestaque,
+            emPromocao: emPromocao
         };
 
         Itens.push(FichaItemTemplate);
+        if (Itens.length % 2 == 0) {
+            console.log(`--- Item ${nome} em promoção da semana! ---`);
+        }
         console.log(`--- Item ${i} cadastrado com sucesso! ---`);
     }
 }
 
-while (opcao !== "3") {
+while (opcao !== 4) {
     console.log("\n=== MENU ===");
-    opcao = prompt("[1] Pesquisa dos produtos\n[2] Cadastrar produtos\n[3] Encerrar Sessão\nEscolha: ");
+    opcao = Number(prompt("[1] Pesquisa dos produtos\n[2] Cadastrar produtos\n[3] Simular Venda\n[4] Encerrar Sessão\nEscolha: "));
 
-    if (opcao === "3") {
+    if (opcao === 4) {
         console.log("--- Encerrando a sessão ---");
-    } else if (opcao === "2") {
+    } else if (opcao === 3) {
+        SimularVenda();
+    } else if (opcao === 2) {
         CadastrarProduto();
-    } else if (opcao === "1") {
+    } else if (opcao === 1) {
         ProcurarProdutos();
     } else {
         console.log("Opção inválida. Tente novamente.");
