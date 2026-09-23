@@ -7,6 +7,7 @@ ParseFloat serve para converter um texto
 Trim tira espaços em branco do codigo
 Console.Table faz uma tabela para ficar mais parecida com um catalogo
 IsNan(variavel) verifica se uma variavel não é um numero(Nan = not a number)
+ParseInt serve para converter strings em números inteiros
 */
 function gerarInteiroInclusivo(min, max) {
     min = Math.ceil(min);
@@ -16,8 +17,10 @@ function gerarInteiroInclusivo(min, max) {
 }
 // Etapa 4 Simulação de venda
 function SimularVenda() {
-    let opcao = parseFloat(prompt("Insira a quantidade de itens que serão vendidos: "));
-
+    let opcao = parseInt(prompt("Insira a quantidade de itens que serão vendidos: "));
+    while (isNaN(opcao)||opcao<=0){
+        opcao = parseFloat(prompt("Insira a quantidade de itens que serão vendidos: "));
+    }   
     console.log("Quantidade de vendas:", opcao);
     if (Itens.length > 0) {
         for (let i = 0; i < opcao; i++) {
@@ -27,13 +30,16 @@ function SimularVenda() {
                 console.log("Item vendido:", Itens[indice]);
             }
         }
-        for (let item of Itens) {
-            if (item.Estoque <= 0) {
-                console.log(`Item: ${item} removido por ter 0 unidades disponiveis.`)
-                Itens.splice(item)
-            }
+       // Remove os itens que ficaram sem estoque
+       for (let i = Itens.length - 1; i >= 0; i--) {
+        if (Itens[i].Estoque <= 0) {
+            console.log(
+                `Item: ${Itens[i].Nome} removido por ter 0 unidades disponíveis.`
+            );
 
+            Itens.splice(i, 1);
         }
+    }
         console.table(Itens);
     }
 }
@@ -79,7 +85,7 @@ function CadastrarProduto() {
             preco = parseFloat(prompt(`Preço inválido. Insira novamente o preço do ${i}º item: `));
         }
 
-        let raridade = "Comum";mbgbs
+        let raridade = "Comum";
         let emDestaque = false;
 
         if (preco >= 50 && preco < 100) {
@@ -90,7 +96,7 @@ function CadastrarProduto() {
             raridade = "Lendário";
             emDestaque = true;
         }
-        emPromocao = ((Itens.length + 1) % 2 == 0)
+        let emPromocao = (i % 2 == 0)
         let FichaItemTemplate = {
             Nome: nome,
             Preco: preco,
@@ -108,7 +114,8 @@ function CadastrarProduto() {
     }
 }
 // menu, não foi pedido mas fica mais organizado assim
-while (opcao !== 4) {
+
+function menu(){
     console.log("\n=== MENU ===");
     opcao = parseFloat(prompt("[1] Pesquisa dos produtos\n[2] Cadastrar produtos\n[3] Simular Venda\n[4] Encerrar Sessão\nEscolha: "));
 
@@ -123,4 +130,8 @@ while (opcao !== 4) {
     } else {
         console.log("Opção inválida. Tente novamente.");
     }
+}
+
+while (opcao !== 4) {
+    menu()
 }
