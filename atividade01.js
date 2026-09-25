@@ -117,7 +117,8 @@ function CadastrarProduto() {
 
 function menu(){
     console.log("\n=== MENU ===");
-    opcao = parseFloat(prompt("[1] Pesquisa dos produtos\n[2] Cadastrar produtos\n[3] Simular Venda\n[4] Encerrar Sessão\nEscolha: "));
+    console.log("[1] Pesquisa dos produtos\n[2] Cadastrar produtos\n[3] Simular Venda\n[4] Encerrar Sessão\nEscolha: ")
+    opcao = parseFloat(prompt(""));
 
     if (opcao === 4) {
         console.log("--- Encerrando a sessão ---");
@@ -132,6 +133,6 @@ function menu(){
     }
 }
 
-while (opcao !== 4) {
+do {
     menu()
-}
+} while (opcao !== 4);
