@@ -2,7 +2,7 @@ let Booleanos = [true, false, false, false, true, true, false]
 
 function verBooleanos() {
     let Verificados = []
-    for (booleano of Booleanos) {
+    for (let booleano of Booleanos) {
         if (booleano == true) {
             Verificados.push("Concluido")
         } else {

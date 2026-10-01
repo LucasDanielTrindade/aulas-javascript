@@ -1,7 +1,7 @@
 let vips = ["Lucas","Ryan","Gabriel","Caio","Andrew"]
 
 const verVips = nome =>{
-    for (vip of vips){
+    for (let vip of vips){
         if (vip == nome){
             return "Está na lista"
         }

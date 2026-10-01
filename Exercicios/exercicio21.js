@@ -6,7 +6,7 @@ const missoes = [
 ]
 
 function analisarMissoes(array){
-    for(missao of array){
+    for(let missao of array){
         if (missao.pontos >= 500){
             console.log(`${missao.nome} - Missão Difícil`)
         }else if(missao.pontos >= 200){

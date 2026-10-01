@@ -22,7 +22,7 @@ let Alunos = [
 ]
 
 const verNotas = alunos =>{
-    for (aluno of alunos){
+    for (let aluno of alunos){
         if (aluno.Nota>=7){
             console.log(aluno)
         }
