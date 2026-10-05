@@ -1,6 +1,4 @@
-function carrinho(valor1,valor2){
-    return(valor1+valor2)
+function carrinho(preco1,preco2){
+    return(preco1+preco2)
 }
-let item1 = 50
-let item2 = 150
-console.log(carrinho(item1,item2))
+console.log(carrinho(50,150))
