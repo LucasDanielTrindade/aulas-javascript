@@ -1,9 +1,7 @@
-/*
-Atividade 5: Crie um novo array vazio chamado relatorioDeEstilos.
-Use forEach em elementosFake para percorrer os elementos e adicione
-em relatorioDeEstilos somente o id, tagName e style vindos do array
-elementosFake. No final, exiba o novo array.
-*/
+//Atividade 1: Percorra o array usando for...of. Para cada objeto, adicione uma nova 
+// propriedade dentro de style chamada backgroundColor com o valor '#FFFFFF'. 
+// No final, exiba o array modificado.
+
 const elementosFake = [
     { id: 1, tagName: 'DIV', style: { color: 'blue', display: 'flex' }, classList: ['container', 'active'] },
     { id: 2, tagName: 'H1', style: { color: 'red', display: 'block' }, classList: ['title'] },
@@ -16,7 +14,44 @@ const elementosFake = [
     { id: 9, tagName: 'LI', style: { color: 'black', display: 'list-item' }, classList: ['item-lista', 'pending'] },
     { id: 10, tagName: 'FOOTER', style: { color: 'white', display: 'flex' }, classList: ['footer-area'] }
 ];
+console.log("--- Exercicio 01 ---")
+for (const elemento of elementosFake) {
+    elemento.style.backgroundColor = '#FFFFFF'
+}
+console.log(elementosFake)
 
+console.log("--- Exercicio 02 ---")
+elementosFake.forEach(elemento => {
+    for (const chave in elemento) {
+        if (chave == "id") {
+            elemento[chave] = `ID-${elemento[chave]}`
+        }
+    }
+});
+console.log(elementosFake)
+
+console.log("--- Exercicio 03 ---")
+
+elementosFake.forEach(elemento => {
+    for (const chave in elemento.classList) {
+        if (elemento.classList[chave] == "pending"){
+            elemento.classList.splice(chave)
+            elemento.classList.push("done")
+            elemento.style.color = "green"
+        }
+    }
+});
+
+console.log(elementosFake)
+console.log("--- Exercicio 04 ---")
+for (elemento of elementosFake){
+    if(elemento.tagName == 'DIV'){
+        elemento.tagName = 'SECTION'
+        elemento.classList.push('converted')
+    }
+}
+console.log(elementosFake)
+console.log("--- Exercicio 05 ---")
 let relatorioDeEstilos = []
 elementosFake.forEach(elemento => {
     let add = {id: elemento.id, tagName: elemento.tagName, style: elemento.style}
