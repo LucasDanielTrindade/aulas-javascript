@@ -1,0 +1,18 @@
+/* Seletor de Tag */
+body {
+    background-color: #1a1a1a;
+}
+    /*seletor de classe */
+    .texto-destaque {
+        color: #ff3333;
+        font-weight: bold;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+    #sevensix {
+        color: #3cff00;
+    }
